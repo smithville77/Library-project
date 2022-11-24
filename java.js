@@ -1,7 +1,5 @@
 const myLibrary = [];
 
-
-
 //constructor function to create new book objects
 function Book() {
   this.title = title;
@@ -18,16 +16,44 @@ function addBookToLibrary() {
   let book = new Book(title, author, pages)
   myLibrary.push(book)
   
- 
 }
 
 //submits the form 
 function submitForm(event) {
-  addBookToLibrary();
-  log.textContent = `Book added!`;
   event.preventDefault();
-}
+  clearTable();
+  addBookToLibrary();
+  tableDisplay();
+  log.textContent = `Book added!`;
   
+}
+
+
+// adds books to display table
+function tableDisplay() {
+  
+  myLibrary.forEach(book => {
+    const display = document.getElementById('display-body');
+    let row = display.insertRow(0);
+    let titleCell = row.insertCell(0);
+    let authorCell = row.insertCell(1);
+    let pageCell = row.insertCell(2);
+
+    titleCell.textContent = book.title;
+    authorCell.textContent = book.author;
+    pageCell.textContent = book.pages;
+    
+  })
+}
+
+
+function clearTable() {
+  let display = document.getElementById('display-body');
+  display.textContent = "";
+}
+
+
+
 // global variable declarations
 const form = document.getElementById("submit-form").addEventListener('submit', submitForm);
 const log = document.getElementById('log');
