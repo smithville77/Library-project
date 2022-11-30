@@ -1,5 +1,6 @@
 const myLibrary = [];
 
+
 //constructor function to create new book objects
 function Book() {
   this.title = title;
@@ -59,16 +60,51 @@ function tableDisplay() {
     titleCell.textContent = book.title;
     authorCell.textContent = book.author;
     pageCell.textContent = book.pages;
-    // readCell.textContent = book.read;
+    
+
 
    let toggle = document.createElement("BUTTON");
-   let toggleText  = document.createTextNode(book.read);
-   toggle.appendChild(toggleText);
-   readCell.appendChild(toggle);
+   
+   if (book.read == "Read") {
+    let toggleText = document.createTextNode("✅");
+    toggle.appendChild(toggleText);
+    toggle.appendChild(toggleText);
+    readCell.appendChild(toggle);
 
-   toggle.addEventListener("click", function() {
-    readToggle(book);
-   })
+    toggle.addEventListener("click", 
+      function readToggle() {
+        if (book.read == "Read") {
+          book.read = "Not read";
+          toggleText.textContent = "❌";
+          
+        } else if (book.read == "Not read") {
+          book.read = "Read";
+          toggleText.textContent = "✅";
+        }
+    })
+   
+   } else { 
+    let toggleText = document.createTextNode("❌");
+    toggle.appendChild(toggleText);
+    toggle.appendChild(toggleText);
+    readCell.appendChild(toggle);
+
+    toggle.addEventListener("click", 
+        function readToggle() {
+          if (book.read == "Read") {
+            book.read = "Not read";
+            toggleText.textContent = "❌";
+            
+          } else if (book.read == "Not read") {
+            book.read = "Read";
+            toggleText.textContent = "✅";
+          }
+      })
+   }
+    
+
+   
+   
 
 // creates and appends delete button to object in table
     let delButton = document.createElement("BUTTON");
@@ -83,8 +119,8 @@ function tableDisplay() {
       tableDisplay();
       console.log(myLibrary);
     })
-
     
+  
   })
 }
 
@@ -115,9 +151,9 @@ function clearInputs() {
 
 function readToggle(book) {
   if (book.read == "Read") {
-    book.read.value = "Not read";
+    book.prototype.read = "Not read";
   } else if (book.read == "Not read") {
-    book.read.value = "Read";
+    book.prototype.read = "Read";
   }
 };
 
@@ -125,6 +161,7 @@ function readToggle(book) {
 // global variable declarations
 const form = document.getElementById("submit-form").addEventListener('submit', submitForm);
 const log = document.getElementById('log');
+
 
 
 
